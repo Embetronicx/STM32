@@ -1,0 +1,8 @@
+--cpu Cortex-M7.fp.dp
+".\objects\main.o"
+".\objects\startup_stm32f767xx.o"
+".\objects\system_stm32f7xx.o"
+--strict --scatter ".\Objects\blink.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\blink.map" -o .\Objects\blink.axf
