@@ -43,7 +43,7 @@ int main(void)
   SET_BIT(RCC->APB2ENR, RCC_APB2ENR_IOPCEN);
 
   /* PC13 as output */
-  GPIOC->CRH &= (GPIO_CRH_MODE13|GPIO_CRH_CNF13);     /* Clear MODE13 and CNF13 fields */
+  GPIOC->CRH &= ~(GPIO_CRH_MODE13|GPIO_CRH_CNF13);    /* Clear MODE13 and CNF13 fields */
   GPIOC->CRH |= GPIO_CRH_MODE13_1|GPIO_CRH_MODE13_0;  /* Set MODE13 to 3 (Output) */
 
   /* Endless loop */
