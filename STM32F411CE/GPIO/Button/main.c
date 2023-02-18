@@ -7,7 +7,7 @@
 *
 *   \author     EmbeTronicX
 *
-*   \This code is verified with proteus STM32411CE Board
+*   \This code is verified with STM32411CE Board
 *
 *******************************************************************************/
 
