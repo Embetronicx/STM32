@@ -1,0 +1,4 @@
+lwip.c:60:6:MX_LWIP_Init	2
+lwip.c:126:13:Ethernet_Link_Periodic_Handle	2
+lwip.c:152:6:MX_LWIP_Process	1
+lwip.c:174:13:ethernet_link_status_updated	1
