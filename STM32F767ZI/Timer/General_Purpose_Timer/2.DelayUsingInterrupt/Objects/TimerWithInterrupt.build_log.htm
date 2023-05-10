@@ -27,8 +27,6 @@ Project File Date:  05/09/2023
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
-assembling startup_stm32f767xx.s...
-compiling system_stm32f7xx.c...
 main.c(16): warning: '_Bool' is a C99 extension [-Wc99-extensions]
 static volatile bool led_on = 0;
                 ^
@@ -44,8 +42,10 @@ void TIM3_IRQHandler(void)
 static 
 2 warnings generated.
 compiling main.c...
+assembling startup_stm32f767xx.s...
+compiling system_stm32f7xx.c...
 linking...
-Program Size: Code=840 RO-data=520 RW-data=0 ZI-data=1640  
+Program Size: Code=832 RO-data=520 RW-data=0 ZI-data=1640  
 FromELF: creating hex file...
 ".\Objects\TimerWithInterrupt.axf" - 0 Error(s), 2 Warning(s).
 
@@ -73,12 +73,12 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:1.2.5
-      Include file:  Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h
-      Source file:   MDK/Device/Source/ARM/STM32F76x_77x_OPT.s
-      Source file:   MDK/Device/Source/ARM/STM32F76x_77x_OTP.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F7xx/Source/Templates/arm/startup_stm32f767xx.s
+      Include file:  Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h
+      Source file:   MDK/Device/Source/ARM/STM32F76x_77x_OTP.s
+      Source file:   MDK/Device/Source/ARM/STM32F76x_77x_OPT.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F7xx/Source/Templates/system_stm32f7xx.c
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

@@ -6,11 +6,11 @@
 *
 *   \author     EmbeTronicX
 *
-*   \This code is verified with STM32F767Zi Nucleo Board
+*   \This code is verified with STM32F103 Board
 *
 *******************************************************************************/
 
-#include "stm32f7xx.h" 
+#include "stm32f10x.h" 
 #include <stdbool.h>
 
 static volatile bool led_on = 0;
@@ -33,13 +33,13 @@ void TIM3_IRQHandler(void)
     
     if( led_on )
     {
-      /* Turn ON the PB0 (Green LED), PB7 (Blue LED), PB14 (Red LED) */
-      GPIOB->BSRR |= GPIO_BSRR_BS0 | GPIO_BSRR_BS7 | GPIO_BSRR_BS14;
+      /* Turn ON the LED of PC13 */
+      GPIOC->BSRR |= GPIO_BSRR_BS13;
     }
     else
     {
-      /* Turn OFF the PB0 (Green LED), PB7 (Blue LED), PB14 (Red LED) */
-      GPIOB->BSRR |= GPIO_BSRR_BR0 | GPIO_BSRR_BR7 | GPIO_BSRR_BR14;
+      /* Turn OFF the LED of PC13 */
+      GPIOC->BSRR |= GPIO_BSRR_BR13;
     }
     
     /* Clear the Interrupt Status */
@@ -50,7 +50,7 @@ void TIM3_IRQHandler(void)
 /***************************************************************************//**
 
   \details  This function enables the HSI clock as a system clock and generate 
-            the 16MHz. The Internal HSI Clock is 16MHz. So, we are not using PLL
+            the 8MHz. The Internal HSI Clock is 8MHz. So, we are not using PLL
             and not dividing, Multiplying. So, we will get the 16MHz as it is.
 
   \return   void
@@ -58,7 +58,7 @@ void TIM3_IRQHandler(void)
   \retval   none
 
 *******************************************************************************/
-static void SetSystemClockTo16Mhz(void)
+static void SetSystemClockTo8Mhz(void)
 {
   /* Enabling the HSI clock - If not enabled and ready */
   if( (RCC->CR & RCC_CR_HSIRDY) == 0) 
@@ -82,8 +82,7 @@ static void SetSystemClockTo16Mhz(void)
   RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
   RCC->CFGR |= RCC_CFGR_SW_HSI;
   
-  /* Configure Flash wait state */
-  FLASH->ACR = FLASH_ACR_PRFTEN | FLASH_ACR_LATENCY_3WS;
+  FLASH->ACR  |= FLASH_ACR_LATENCY_2;
   
   /* Disabling HSE Clock */
   RCC->CR &= ~RCC_CR_HSEON;
@@ -104,8 +103,8 @@ static void ConfigureTimer3(void)
   SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM3EN);
   
   /* fCK_PSC / (PSC[15:0] + 1)
-     (16 MHz / (15999+1)) = 1 KHz timer clock speed */
-  TIM3->PSC = 15999;
+     (8 MHz / (7999+1)) = 1 KHz timer clock speed */
+  TIM3->PSC = 7999;
   
   /* (1 KHz / 1000) = 1Hz = 1s */
   /* So, this will generate the 1s delay */
@@ -135,27 +134,23 @@ static void ConfigureTimer3(void)
 *******************************************************************************/
 int main(void)
 {
-  /* Set System clock to 16 MHz using HSI */
-  SetSystemClockTo16Mhz();
+
+  /* Set System clock to 8MHz using HSI*/
+  SetSystemClockTo8Mhz();
   
   /* Configure the Timer 3 */
   ConfigureTimer3();
   
-  /* Enable the AHB clock all GPIO port B */
-  SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN);
+  /* Enable the APB clock all GPIO port C */
+  SET_BIT(RCC->APB2ENR, RCC_APB2ENR_IOPCEN);
 
-  /* set Port B as output */
-  GPIOB->MODER |= 0x55555555;
-  
-  /* Set Port B as Push Pull */
-  GPIOB->OTYPER = 0x00000000;
-  
-  /* Set Low Speed */
-  GPIOB->OSPEEDR = 0x00000000;
+  /* PC13 as output */
+  GPIOC->CRH &= ~(GPIO_CRH_MODE13|GPIO_CRH_CNF13);    /* Clear MODE13 and CNF13 fields */
+  GPIOC->CRH |= GPIO_CRH_MODE13_1|GPIO_CRH_MODE13_0;  /* Set MODE13 to 3 (Output) */
 
   /* Endless loop */
   while(1)
   {
-   
+  
   }
 }

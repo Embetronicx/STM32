@@ -6,11 +6,11 @@
 *
 *   \author     EmbeTronicX
 *
-*   \This code is verified with STM32F767Zi Nucleo Board
+*   \This code is verified with STM32411CE Board
 *
 *******************************************************************************/
 
-#include "stm32f7xx.h" 
+#include "stm32f4xx.h" 
 #include <stdbool.h>
 
 static volatile bool led_on = 0;
@@ -33,13 +33,13 @@ void TIM3_IRQHandler(void)
     
     if( led_on )
     {
-      /* Turn ON the PB0 (Green LED), PB7 (Blue LED), PB14 (Red LED) */
-      GPIOB->BSRR |= GPIO_BSRR_BS0 | GPIO_BSRR_BS7 | GPIO_BSRR_BS14;
+      /* Turn ON the LED of PC13 */
+      GPIOC->BSRR |= GPIO_BSRR_BS13;
     }
     else
     {
-      /* Turn OFF the PB0 (Green LED), PB7 (Blue LED), PB14 (Red LED) */
-      GPIOB->BSRR |= GPIO_BSRR_BR0 | GPIO_BSRR_BR7 | GPIO_BSRR_BR14;
+      /* Turn OFF the LED of PC13 */
+      GPIOC->BSRR |= GPIO_BSRR_BR13;
     }
     
     /* Clear the Interrupt Status */
@@ -82,10 +82,10 @@ static void SetSystemClockTo16Mhz(void)
   RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
   RCC->CFGR |= RCC_CFGR_SW_HSI;
   
-  /* Configure Flash wait state */
-  FLASH->ACR = FLASH_ACR_PRFTEN | FLASH_ACR_LATENCY_3WS;
+  /* Configure Flash prefetch, Instruction cache, Data cache and wait state */
+  FLASH->ACR = FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY_3WS;
   
-  /* Disabling HSE Clock */
+  /* Disabling HSE Clock*/
   RCC->CR &= ~RCC_CR_HSEON;
 }
 
@@ -135,27 +135,22 @@ static void ConfigureTimer3(void)
 *******************************************************************************/
 int main(void)
 {
+
   /* Set System clock to 16 MHz using HSI */
   SetSystemClockTo16Mhz();
   
   /* Configure the Timer 3 */
   ConfigureTimer3();
   
-  /* Enable the AHB clock all GPIO port B */
-  SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN);
+  /* Enable the AHB clock all GPIO port C */
+  SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOCEN);
 
-  /* set Port B as output */
-  GPIOB->MODER |= 0x55555555;
-  
-  /* Set Port B as Push Pull */
-  GPIOB->OTYPER = 0x00000000;
-  
-  /* Set Low Speed */
-  GPIOB->OSPEEDR = 0x00000000;
+  /* set all Port C as output */
+  GPIOC->MODER = 0x55555555;
 
   /* Endless loop */
   while(1)
   {
-   
+  
   }
 }
