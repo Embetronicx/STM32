@@ -1,0 +1,8 @@
+main.c:71:5:main	1
+main.c:119:6:SystemClock_Config	3
+main.c:161:13:MX_USART3_UART_Init	2
+main.c:194:13:MX_DMA_Init	1
+main.c:215:13:MX_GPIO_Init	1
+main.c:228:6:HAL_UART_RxCpltCallback	1
+main.c:240:6:MPU_Config	1
+main.c:271:6:Error_Handler	1
