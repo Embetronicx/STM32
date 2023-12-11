@@ -1,0 +1,9 @@
+../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c:91:20:USBH_CtlSendSetup	1
+../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c:117:20:USBH_CtlSendData	2
+../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c:150:20:USBH_CtlReceiveData	1
+../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c:177:20:USBH_BulkSendData	2
+../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c:209:20:USBH_BulkReceiveData	1
+../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c:235:20:USBH_InterruptReceiveData	1
+../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c:261:20:USBH_InterruptSendData	1
+../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c:287:20:USBH_IsocReceiveData	1
+../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c:314:20:USBH_IsocSendData	1

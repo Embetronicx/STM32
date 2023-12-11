@@ -1,0 +1,5 @@
+../USB_HOST/App/usb_host.c:73:5:__io_putchar	1
+../USB_HOST/App/usb_host.c:84:16:ETX_MSC_ProcessUsbDevice	6
+../USB_HOST/App/usb_host.c:176:6:MX_USB_HOST_Init	4
+../USB_HOST/App/usb_host.c:203:6:MX_USB_HOST_Process	1
+../USB_HOST/App/usb_host.c:211:13:USBH_UserProcess	5
