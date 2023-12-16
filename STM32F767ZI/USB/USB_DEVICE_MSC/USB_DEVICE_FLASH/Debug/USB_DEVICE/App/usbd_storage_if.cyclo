@@ -1,0 +1,8 @@
+../USB_DEVICE/App/usbd_storage_if.c:164:26:write_data_to_flash	4
+../USB_DEVICE/App/usbd_storage_if.c:236:8:STORAGE_Init_FS	1
+../USB_DEVICE/App/usbd_storage_if.c:252:8:STORAGE_GetCapacity_FS	1
+../USB_DEVICE/App/usbd_storage_if.c:268:8:STORAGE_IsReady_FS	1
+../USB_DEVICE/App/usbd_storage_if.c:282:8:STORAGE_IsWriteProtected_FS	1
+../USB_DEVICE/App/usbd_storage_if.c:299:8:STORAGE_Read_FS	1
+../USB_DEVICE/App/usbd_storage_if.c:321:8:STORAGE_Write_FS	1
+../USB_DEVICE/App/usbd_storage_if.c:335:8:STORAGE_GetMaxLun_FS	1
